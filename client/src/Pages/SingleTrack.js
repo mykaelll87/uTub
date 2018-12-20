@@ -1,6 +1,13 @@
 import React, {Component} from 'react'
 
 export default class SingleTrackPage extends Component{
+    constructor(p){
+        super(p);
+        this.state = {
+            trackUrl:"",
+            info:{}
+        }
+    }
     render(){
         return(
             <div className="row center">
