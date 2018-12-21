@@ -4,7 +4,7 @@ import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles'
 import {BrowserRouter, Switch, Route, Link} from 'react-router-dom'
 
 import Header from './Components/Header';
-import SingleTrack from './Pages/SingleTrack';
+import SingleTrackPage from './Pages/SingleTrackPage';
 import { Typography, Button, withStyles } from '@material-ui/core';
 import { orange, red } from '@material-ui/core/colors';
 
@@ -45,13 +45,12 @@ class App extends Component {
             <CssBaseLine/>
             <Header/>
             {/* Body */}
-            <main>
-              <Switch>
-                <Route path="/url" Component={SingleTrack}/>
+            <Switch>
+                <Route path="/url" component={SingleTrackPage}/>
                 <Route path="/playlist"/>
                 <Route path="/" exact/>
                 <Route render={props=>(
-                  <div className={this.props.classes.heroUnit}>
+                    <main><div className={this.props.classes.heroUnit}>
                     <div className={this.props.classes.heroContent}>
                         <Typography variant="h1">404</Typography>
                         <Typography variant="h6">Sorry, don't know what you're talking about</Typography>
@@ -61,10 +60,9 @@ class App extends Component {
                             </Link>
                         </div>
                     </div> 
-                  </div>
+                    </div></main>
                 )}/>
-              </Switch>
-            </main>
+            </Switch>
           </div>
         </MuiThemeProvider>
       </BrowserRouter>
