@@ -7,6 +7,7 @@ import Header from './Components/Header';
 import SingleTrackPage from './Pages/SingleTrackPage';
 import { Typography, Button, withStyles } from '@material-ui/core';
 import { orange, red } from '@material-ui/core/colors';
+import PlaylistPage from './Pages/PlaylistPage';
 
 const theme = createMuiTheme({
     palette:{
@@ -47,7 +48,7 @@ class App extends Component {
             {/* Body */}
             <Switch>
                 <Route path="/url" component={SingleTrackPage}/>
-                <Route path="/playlist"/>
+                <Route path="/playlist" component={PlaylistPage}/>
                 <Route path="/" exact/>
                 <Route render={props=>(
                     <main><div className={this.props.classes.heroUnit}>

@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Card, CardContent, CardActions, CardMedia,CircularProgress ,withStyles, Typography, IconButton } from '@material-ui/core';
-import {FontDownload, CloudDownload} from '@material-ui/icons'
+import {CloudDownload} from '@material-ui/icons'
 const styles = theme =>({
     card:{
         marginTop: theme.spacing.unit * 4,

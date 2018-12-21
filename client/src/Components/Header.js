@@ -20,7 +20,11 @@ class Header extends Component{
         this.setState({drawer:newState})
     }
 
-    pages = [{path:"/", name:"Home"}, {path:"/url", name: "Single Video"}]
+    pages = [
+        {path:"/", name:"Home"}, 
+        {path:"/url", name: "Single Video"},
+        {path:"/playlist", name:"Playlist"}
+    ]
 
     render(){
         /* todo Inclure le react router */
