@@ -8,6 +8,12 @@ import {Link} from 'react-router-dom'
 
 import '../css/Header.css'
 
+const pages = [
+    {path:"/", name:"Home"}, 
+    {path:"/url", name: "Single Video"},
+    {path:"/playlist", name:"Playlist"}
+]
+
 class Header extends Component{
     constructor(p){
         super(p)
@@ -18,13 +24,7 @@ class Header extends Component{
 
     toggleDrawer=(newState)=>()=>{
         this.setState({drawer:newState})
-    }
-
-    pages = [
-        {path:"/", name:"Home"}, 
-        {path:"/url", name: "Single Video"},
-        {path:"/playlist", name:"Playlist"}
-    ]
+    } 
 
     render(){
         /* todo Inclure le react router */
@@ -41,7 +41,7 @@ class Header extends Component{
                             </IconButton>
                             <Drawer id="Drawer" open={this.state.drawer} onClose={this.toggleDrawer(false)}>
                             <List>
-                                {this.pages.map(item=>(
+                                {pages.map(item=>(
                                     <ListItem button key={item.path}>
                                         <ListItemText primary={item.name}/>
                                     </ListItem>
@@ -54,7 +54,7 @@ class Header extends Component{
                         </Typography>
                         <Hidden smDown>
                         <div className="links">
-                            {this.pages.map(val=><Link to={val.path} key={val.path}><Button color="inherit">{val.name}</Button></Link>)}
+                            {pages.map(val=><Button key={val.path} component={Link} to={val.path} color="inherit">{val.name}</Button>)}
                         </div>
                         </Hidden>
                     </Toolbar>

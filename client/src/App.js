@@ -56,9 +56,7 @@ class App extends Component {
                         <Typography variant="h1">404</Typography>
                         <Typography variant="h6">Sorry, don't know what you're talking about</Typography>
                         <div className={this.props.classes.heroButtons}>
-                            <Link to="/" type="routerLink">
-                                <Button variant="contained" color="primary">Home</Button>
-                            </Link>
+                            <Button component={Link} to="/" variant="contained" color="primary">Home</Button>
                         </div>
                     </div> 
                     </div></main>
