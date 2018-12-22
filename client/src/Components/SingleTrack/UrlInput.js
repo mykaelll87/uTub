@@ -1,5 +1,7 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 import {Paper, TextField, Button, withStyles} from '@material-ui/core';
+import {fetchInfo} from '../../redux/actions'
 
 const styles= theme=>({
     urlPaper:{
@@ -33,7 +35,7 @@ class UrlInput extends Component{
     }
 
     handleSubmit = (e)=>{
-        this.props.fetchInfo(this.state.url)
+        this.props.dispatch(fetchInfo(this.state.url))
     }
 
     render(){
@@ -47,11 +49,11 @@ class UrlInput extends Component{
                         fullWidth
                         onChange={(event)=>{this.setState({url:event.target.value})}}
                     />
-                    <Button variant="contained" color="primary">Submit</Button>
+                    <Button onClick={this.handleSubmit} variant="contained" color="primary">Submit</Button>
                 </form>
             </Paper>
         )
     }
 }
 
-export default withStyles(styles)(UrlInput)
+export default withStyles(styles)(connect()(UrlInput))

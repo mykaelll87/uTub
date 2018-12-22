@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import {Card, CardContent, CardActions, CardMedia,CircularProgress ,withStyles, Typography, IconButton } from '@material-ui/core';
 import {CloudDownload} from '@material-ui/icons'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 const styles = theme =>({
     card:{
         marginTop: theme.spacing.unit * 4,
@@ -41,12 +42,13 @@ class TrackCard extends Component{
         </React.Fragment>
     )
     render(){
-        return(
-        <Card className={this.props.classes.card}>
-            {this.props.loading?
-                <div style={{textAlign:"center", width:'100%'}}><CircularProgress/></div>
-                :this.renderInfo()}                    
-        </Card>
+        if (!this.props.loading&&!(this.props.info&&this.props.info.length)) return null
+         else return(
+            <Card className={this.props.classes.card}>
+                {this.props.loading?
+                    <div style={{textAlign:"center", width:'100%'}}><CircularProgress/></div>
+                    :this.renderInfo()}                    
+            </Card>
         )
     }
 }
@@ -54,10 +56,17 @@ class TrackCard extends Component{
 TrackCard.propTypes = {
     loading: PropTypes.bool.isRequired,
     info: PropTypes.shape({
-        thumbnail:PropTypes.string.isRequired,
-        title:PropTypes.string.isRequired,
-        artist:PropTypes.string.isRequired
-    }).isRequired
+        thumbnail:PropTypes.string,
+        title:PropTypes.string,
+        artist:PropTypes.string
+    })
 }
 
-export default withStyles(styles)(TrackCard)
+function mapStateToProps(state){
+    const {singleTrack} = state
+    const {info, loading} = singleTrack||{info:{},loading:false}
+
+    return {info, loading}
+}
+
+export default withStyles(styles)(connect(mapStateToProps)(TrackCard))
