@@ -31,6 +31,11 @@ class UrlInput extends Component{
             url:""
         }
     }
+
+    handleSubmit = (e)=>{
+        this.props.fetchInfo(this.state.url)
+    }
+
     render(){
         return (
             <Paper className={this.props.classes.urlPaper}>

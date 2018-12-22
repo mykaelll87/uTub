@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {Card, CardContent, CardActions, CardMedia,CircularProgress ,withStyles, Typography, IconButton } from '@material-ui/core';
 import {CloudDownload} from '@material-ui/icons'
+import PropTypes from 'prop-types'
 const styles = theme =>({
     card:{
         marginTop: theme.spacing.unit * 4,
@@ -23,28 +24,16 @@ const styles = theme =>({
 });
 
 class TrackCard extends Component{
-    constructor(p){
-        super(p)
-        this.state={
-            loading:false,
-            info:{
-                thumbnail:"https://i.ytimg.com/vi/_uigJsr9sFA/hqdefault.jpg?sqp=-oaymwEZCPYBEIoBSFXyq4qpAwsIARUAAIxCGAFwAQ==&rs=AOn4CLBkBXJe7ng11HB_VHkKwCd3KifLqg",
-                titre:"Allo",
-                artist:"Moé"
-            }
-        }
-    }
-
     renderInfo=()=>(
         <React.Fragment>
             <CardMedia 
                 className={this.props.classes.cardMedia}
-                image={this.state.info.thumbnail}
+                image={this.props.info.thumbnail}
                 title="thumbnail"
             />
             <CardContent>
-                <Typography gutterBottom component='h2' variant='h5'>{this.state.info.titre}</Typography>
-                <Typography component='p'>{this.state.info.artist}</Typography>
+                <Typography gutterBottom component='h2' variant='h5'>{this.props.info.titre}</Typography>
+                <Typography component='p'>{this.props.info.artist}</Typography>
             </CardContent>
             <CardActions>
                 <IconButton><CloudDownload/></IconButton>
@@ -54,12 +43,21 @@ class TrackCard extends Component{
     render(){
         return(
         <Card className={this.props.classes.card}>
-            {this.state.loading?
+            {this.props.loading?
                 <div style={{textAlign:"center", width:'100%'}}><CircularProgress/></div>
                 :this.renderInfo()}                    
         </Card>
         )
     }
+}
+
+TrackCard.propTypes = {
+    loading: PropTypes.bool.isRequired,
+    info: PropTypes.shape({
+        thumbnail:PropTypes.string.isRequired,
+        title:PropTypes.string.isRequired,
+        artist:PropTypes.string.isRequired
+    }).isRequired
 }
 
 export default withStyles(styles)(TrackCard)
