@@ -19,10 +19,6 @@ function recieveInfo(json){
     }
 }
 
-/**
- * 
- * @param {string} url 
- */
 export function fetchInfo(url){
     return (dispatch)=>{
         dispatch(requestInfo())
