@@ -14,6 +14,7 @@ const styles = theme =>({
             marginLeft: 'auto',
             marginRight: 'auto',
         },
+        marginBottom:theme.spacing.unit *2
     },
     cardMedia:{
         height: 0,
@@ -33,7 +34,7 @@ class TrackCard extends Component{
                 title="thumbnail"
             />
             <CardContent>
-                <Typography gutterBottom component='h2' variant='h5'>{this.props.info.titre}</Typography>
+                <Typography gutterBottom component='h2' variant='h5'>{this.props.info.title}</Typography>
                 <Typography component='p'>{this.props.info.artist}</Typography>
             </CardContent>
             <CardActions>
@@ -42,7 +43,7 @@ class TrackCard extends Component{
         </React.Fragment>
     )
     render(){
-        if (!this.props.loading&&!(this.props.info&&this.props.info.length)) return null
+        if (!this.props.loading&&!(this.props.info&&Object.keys(this.props.info).length)) return null
          else return(
             <Card className={this.props.classes.card}>
                 {this.props.loading?

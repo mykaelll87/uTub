@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cd client; npm start; cd ../server; npm start"
+    "start": "npm run startClient; npm run startServer",
+    "startClient": "cd ./client; npm start &",
+    "startServer":"cd ./server; nodemon &"
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "eslint": "^5.10.0"
-  }
+  "dependencies": {}
 }
