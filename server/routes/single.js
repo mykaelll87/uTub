@@ -52,10 +52,10 @@ router.get("/download/:u", function(req, res){
     try{
         let u = decodeURIComponent(req.params.u)
         let stream = ytdl(u, downloadOptions)
-        stream.on("response", (response)=>{
-            res.setHeader("content-type", response.headers["content-type"])
-            res.setHeader("content-length", response.headers["content-length"])
-        })
+        // stream.on("response", (response)=>{
+        //     res.setHeader("content-type", response.headers["content-type"])
+        //     res.setHeader("content-length", response.headers["content-length"])
+        // })
         stream.pipe(res)
     } catch(e){
         console.error(e)

@@ -1,11 +1,5 @@
-import { CLEAR_SINGLE_INFO, REQUEST_SINGLE_INFO, RECIEVE_SINGLE_INFO } from "./actionTypes";
+import { REQUEST_SINGLE_INFO, RECIEVE_SINGLE_INFO } from "./actionTypes";
 import { apiUrl } from "../consts";
-
-export function clearInfo(){
-    return {
-        type:CLEAR_SINGLE_INFO
-    }
-}
 
 function requestInfo(){
     return {

@@ -3,6 +3,8 @@ import {Card, CardContent, CardActions, CardMedia,CircularProgress ,withStyles, 
 import {CloudDownload} from '@material-ui/icons'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
+
+import {download} from '../../utils/singleDownload'
 const styles = theme =>({
     card:{
         marginTop: theme.spacing.unit * 4,
@@ -26,6 +28,19 @@ const styles = theme =>({
 });
 
 class TrackCard extends Component{
+    constructor(p){
+        super(p)
+        this.state = {title: p.title}
+    }
+    downloadSong= async ()=>{
+        console.log('bon matin')
+        let blobUrl = await download(this.props.info.id)
+        let a = document.createElement('a')
+        a.download = this.props.info.title
+        a.href = await blobUrl
+        a.click()
+    }
+
     renderInfo=()=>(
         <React.Fragment>
             <CardMedia 
@@ -38,7 +53,9 @@ class TrackCard extends Component{
                 <Typography component='p'>{this.props.info.artist}</Typography>
             </CardContent>
             <CardActions>
-                <IconButton><CloudDownload/></IconButton>
+                <IconButton onClick={this.downloadSong}>
+                    <CloudDownload/>
+                </IconButton>
             </CardActions>
         </React.Fragment>
     )
@@ -57,6 +74,7 @@ class TrackCard extends Component{
 TrackCard.propTypes = {
     loading: PropTypes.bool.isRequired,
     info: PropTypes.shape({
+        id:PropTypes.string,
         thumbnail:PropTypes.string,
         title:PropTypes.string,
         artist:PropTypes.string
