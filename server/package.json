@@ -9,6 +9,7 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
+    "fluent-ffmpeg": "^2.1.2",
     "google-auth-library": "^2.0.2",
     "googleapis": "^36.0.0",
     "hbs": "~4.0.1",

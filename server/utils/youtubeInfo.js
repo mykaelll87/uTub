@@ -7,11 +7,10 @@ exports.extractId= function(url){
         if (validate(url)) { return url }
         else{
             let id = (new URL(url)).searchParams.get('v')
-            console.log(id)
             return validate(id)?id:null
         }
     } catch(e){
-        console.log("salut")
+        console.error(e)
         return null
     }    
 }

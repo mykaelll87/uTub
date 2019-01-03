@@ -41,7 +41,7 @@ class UrlInput extends Component{
     render(){
         return (
             <Paper className={this.props.classes.urlPaper}>
-                <form autoComplete="off" noValidate className={this.props.classes.form}>
+                <form autoComplete="off" noValidate className={this.props.classes.form} onSubmit={this.handleSubmit}>
                     <TextField
                         label="Url"
                         value={this.state.url}

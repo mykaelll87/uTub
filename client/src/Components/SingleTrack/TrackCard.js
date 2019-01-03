@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
 import {download} from '../../utils/singleDownload'
+import { apiUrl } from '../../consts';
 const styles = theme =>({
     card:{
         marginTop: theme.spacing.unit * 4,
@@ -32,12 +33,14 @@ class TrackCard extends Component{
         super(p)
         this.state = {title: p.title}
     }
+    
     downloadSong= async ()=>{
-        console.log('bon matin')
-        let blobUrl = await download(this.props.info.id)
+        // let blobUrl = await download(this.props.info.id)
         let a = document.createElement('a')
-        a.download = this.props.info.title
-        a.href = await blobUrl
+        // a.download = this.props.info.title+'.mp3'
+        // a.href = await blobUrl
+        a.href = `${apiUrl}/single/download/${this.props.info.id}`
+        a.target = "open"
         a.click()
     }
 
