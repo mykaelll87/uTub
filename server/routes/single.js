@@ -80,6 +80,36 @@ router.get("/download/:u", function(req, res){
     }
 })
 
-
+router.post("/download", function(req, res){
+    try{
+        let {id, title} = req.body;
+        // let id = decodeURIComponent(req.body.id)
+        
+        if (id && title){
+            let downloadStream = ytdl(id, downloadOptions)
+            downloadStream.on("response", (response)=>{
+                res.setHeader("content-type", "audio/mpeg");
+                res.setHeader("content-length", response.headers["content-length"]);
+                res.setHeader("content-disposition", `attachment; filename='${title}.mp3'`)
+            })
+            let convertStream = new FFMpeg(downloadStream)
+            convertStream.format("mp3").pipe(res)
+            // (new FFMpeg(ytdl(u, downloadOptions), downloadOptions)).format("mp3").pipe(res);
+        }
+        else {
+            console.error(req.body);
+            res.sendStatus(400);
+        }
+        // let stream = ytdl(u, downloadOptions)
+        // stream.on("response", (response)=>{
+        //     res.setHeader("content-type", response.headers["content-type"])
+        //     res.setHeader("content-length", response.headers["content-length"])
+        // })
+        
+    } catch(e){
+        console.error(e)
+        res.sendStatus(500)
+    }
+})
 
 module.exports = router;
