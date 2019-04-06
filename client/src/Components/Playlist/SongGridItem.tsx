@@ -1,28 +1,23 @@
-import React, {Component} from 'react'
-import PropTypes from 'prop-types'
-import { GridListTile, GridListTileBar, Checkbox } from '@material-ui/core';
+import { Checkbox, GridListTile, GridListTileBar } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { ISongInfo } from '../../shared/models/ISongInfo';
 
-export default class SongGridItem extends Component{
-    render(){
-        let {song} = this.props
-
-        return (
-            <GridListTile>
-                <img src={song.thumbnail} alt={song.title}/>
-                <GridListTileBar
-                    title={song.title}
-                    subtitle={`By: ${song.artist}`}
-                    actionIcon={<Checkbox color="primary"/>}
-                />
-            </GridListTile>
-        )
-    }
+interface ISongGridItemProps {
+  song: ISongInfo;
 }
 
-SongGridItem.propTypes = {
-    song: PropTypes.shape({
-        thumbnail:PropTypes.string.isRequired,
-        title:PropTypes.string.isRequired,
-        artist:PropTypes.string.isRequired
-    }).isRequired
+export const SongGridItem: React.FC<ISongGridItemProps> = props => {
+  let { song } = props
+
+  return (
+    <GridListTile>
+      <img src={song.thumbnail} alt={song.title} />
+      <GridListTileBar
+        title={song.title}
+        subtitle={`By: ${song.artist}`}
+        actionIcon={<Checkbox color="primary" />}
+      />
+    </GridListTile>
+  )
 }

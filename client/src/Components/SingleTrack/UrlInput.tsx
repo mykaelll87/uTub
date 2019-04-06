@@ -1,5 +1,5 @@
 import { Button, Paper, TextField, withStyles, StyleRulesCallback } from '@material-ui/core';
-import React, { Component, Dispatch } from 'react';
+import React, { Component, Dispatch, FormEvent } from 'react';
 import { connect } from 'react-redux';
 import { fetchInfo } from '../../redux/actions';
 
@@ -32,14 +32,14 @@ interface UrlInputProps{
 }
 
 class UrlInput extends Component<UrlInputProps, {url: string}> {
-  constructor(p) {
+  constructor(p: UrlInputProps) {
     super(p)
     this.state = {
       url: ""
     }
   }
 
-  handleSubmit = (e) => {
+  handleSubmit = (e :FormEvent) => {
     this.props.dispatch(fetchInfo(this.state.url))
   }
 

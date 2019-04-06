@@ -1,8 +1,9 @@
-import { CircularProgress, Paper, withStyles } from '@material-ui/core';
+import { CircularProgress, Paper, withStyles, Theme } from '@material-ui/core';
 import React, { Component } from 'react';
 import SongGrid from './SongGrid';
+import { ThemedComponentProps } from '@material-ui/core/styles/withTheme';
 
-const styles = theme => ({
+const styles = (theme:Theme) => ({
   paper: {
     marginTop: theme.spacing.unit * 4,
     alignItems: 'center',
@@ -18,8 +19,8 @@ const styles = theme => ({
   },
 })
 
-class PlayListResult extends Component {
-  constructor(p) {
+class PlayListResult extends Component<any, any> {
+  constructor(p: any) {
     super(p);
     this.state = {
       loading: false,

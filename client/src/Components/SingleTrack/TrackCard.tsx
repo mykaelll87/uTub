@@ -34,7 +34,7 @@ interface ITrackCardProps {
 }
 
 class TrackCard extends Component<ITrackCardProps>{
-  constructor(p) {
+  constructor(p: ITrackCardProps) {
     super(p)
     this.state = { title: p.info.title }
   }
@@ -84,7 +84,7 @@ class TrackCard extends Component<ITrackCardProps>{
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   const { singleTrack } = state
   const { info, loading } = singleTrack || { info: {}, loading: false }
 

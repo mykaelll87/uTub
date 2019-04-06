@@ -22,14 +22,14 @@ interface IHeaderState {
 }
 
 class Header extends Component<IHeaderProps, IHeaderState> {
-  constructor(p) {
+  constructor(p: IHeaderProps) {
     super(p)
     this.state = {
       drawer: false
     }
   }
 
-  toggleDrawer = (newState) => () => {
+  toggleDrawer = (newState: boolean) => () => {
     this.setState({ drawer: newState })
   }
 
@@ -61,7 +61,7 @@ class Header extends Component<IHeaderProps, IHeaderState> {
             </Typography>
             <Hidden smDown>
               <div className="links">
-                {pages.map(val => <Button key={val.path} component={Link} to={val.path} color="inherit">{val.name}</Button>)}
+                {pages.map(val => <Button key={val.path} component={'a'} href={val.path} color="inherit">{val.name}</Button>)}
               </div>
             </Hidden>
           </Toolbar>
