@@ -3,7 +3,7 @@ const router = express.Router();
 const ytInfo = require('googleapis').google.youtube("v3");
 const ytdl = require('ytdl-core');
 const FFMpeg = require('fluent-ffmpeg');
-const key = require('fs').readFileSync("../keys/YoutubeAPI").toString();
+const key = require('fs').readFileSync("./keys/YoutubeAPI").toString();
 const youtubeUtil = require('../utils/youtubeInfo');
 
 async function getInfo(id){
