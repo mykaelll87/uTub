@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const ytInfo = require('googleapis').google.youtube("v3");
+const key = require('fs').readFileSync("./keys/YoutubeAPI").toString();
+const ytInfo = require('googleapis').google.youtube({
+    version: "v3",    
+});
 const ytdl = require('ytdl-core');
 const FFMpeg = require('fluent-ffmpeg');
-const key = require('fs').readFileSync("./keys/YoutubeAPI").toString();
 const youtubeUtil = require('../utils/youtubeInfo');
 
 async function getInfo(id){
@@ -11,7 +13,7 @@ async function getInfo(id){
         maxResults: 1,
         part: 'snippet',
         id: id,
-        key : key
+        key: key
     }
     return parseInfo(await ytInfo.videos.list(options))
 }
@@ -56,12 +58,17 @@ router.get("/download/:u", function(req, res){
         if (u){
             let downloadStream = ytdl(u, downloadOptions)
             downloadStream.on("response", (response)=>{
-                res.setHeader("content-type", "audio/mpeg");
                 res.setHeader("content-length", response.headers["content-length"]);
-                res.setHeader("content-disposition", "attachment; filename='bonMatin.mp3'")
+            });
+            downloadStream.on('info', (info)=>{
+                console.log(info.player_response.videoDetails);
+                res.setHeader("content-type", "audio/mpeg");
+                res.setHeader("content-disposition", `attachment; filename=${info.player_response.videoDetails.title}.mp3`)
             })
             let convertStream = new FFMpeg(downloadStream)
             convertStream.format("mp3").pipe(res)
+            res.on("close", ()=>{downloadStream.destroy(); convertStream.destroy();})
+
             // (new FFMpeg(ytdl(u, downloadOptions), downloadOptions)).format("mp3").pipe(res);
         }
         else {
