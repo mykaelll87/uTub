@@ -20,12 +20,7 @@ async function getInfo(id){
 function parseInfo(googleResponse){
     if(googleResponse.data.items.length ===1){
         let res = googleResponse.data.items[0]
-        return {
-            id: res.id,
-            title: res.snippet.title,
-            thumbnail: res.snippet.thumbnails.medium.url,
-            artist: res.snippet.channelTitle
-        }
+        return youtubeUtil.formatSong(res)
     } else {
         throw new Exception("No Video Found")
     }

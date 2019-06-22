@@ -14,3 +14,12 @@ exports.extractId= function(url){
         return null
     }    
 }
+
+exports.formatSong=function(song){
+    return {
+        id: song.id,
+        title: song.snippet.title,
+        thumbnail: song.snippet.thumbnails.medium.url,
+        artist: song.snippet.channelTitle
+    }
+}
